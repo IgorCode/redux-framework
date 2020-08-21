@@ -1,8 +1,7 @@
 language: php
+dist: precise
 php:
-#- 5.2
-- 5.3
-#- 5.4
+- 7.2
 env:
   global:
     #secure: "HxNuZO2wWngETP4ZAJN/IA4SCG9C3yw8hV4laJOrb9xXRv8w1YI4xLKUTDEK8H1tg3f0Yh4943f22aDPoXUu8oG913yljbrjMPXM+30FkbxPLOu4rViepjV1ZPJ0+aw+fGvNfDWBfeNx32Ooi9BeK5cpGTKeLgzAJCeG2mROPpo="
@@ -22,26 +21,26 @@ install:
 - find ReduxCore -type f | sort -u | xargs cat | md5sum > md5
 before_script: bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
 script:
-- phpunit
-- grunt jshint
-- grunt lintPHP
+# - phpunit
+# - grunt jshint
+# - grunt lintPHP
 after_success:
   # Install the Heroku gem (or the Heroku toolbelt)
-  - gem install heroku
+  # - gem install heroku
   # Add your Heroku git repo:
-  - git remote add heroku git@heroku.com:redux-premium.git
+  # - git remote add heroku git@heroku.com:redux-premium.git
   # Turn off warnings about SSH keys:
-  - echo "Host heroku.com" >> ~/.ssh/config
-  - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
-  - echo "   CheckHostIP no" >> ~/.ssh/config
-  - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+  # - echo "Host heroku.com" >> ~/.ssh/config
+  # - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
+  # - echo "   CheckHostIP no" >> ~/.ssh/config
+  # - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
   # Clear your current Heroku SSH keys:
-  - heroku keys:clear
+  # - heroku keys:clear
   # Add a new SSH key to Heroku
-  - yes | heroku keys:add
+  # - yes | heroku keys:add
 after_script:
   #- ./bin/commit-uncompressed-files.sh
-  - ./bin/update-mirrors-docs.sh
+  #- ./bin/update-mirrors-docs.sh
 notifications:
   email:
     recipients:
